@@ -3,11 +3,15 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect } from "react";
 import {ScaleLoader} from "react-spinners";
+import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 function ChatWindow() {
     const {prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat} = useContext(MyContext);
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    const navigate = useNavigate()
 
     const getReply = async () => {
         setLoading(true);
@@ -58,6 +62,25 @@ function ChatWindow() {
         setIsOpen(!isOpen);
     }
 
+
+   const logout = async()=>{
+  try {
+    const token = localStorage.getItem('token');
+    await axios.post("http://localhost:8080/user/logout", {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  } catch (err) {
+    console.error(err);
+  } finally {
+    localStorage.removeItem('token'); // Chahe API fail ho ya pass, local token hata do
+    navigate("/login");
+  }
+
+
+
+   }
+
+
     return (
         <div className="chatWindow">
             <div className="navbar">
@@ -69,9 +92,11 @@ function ChatWindow() {
             {
                 isOpen && 
                 <div className="dropDown">
-                    <div className="dropDownItem"><i class="fa-solid fa-gear"></i> Settings</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-cloud-arrow-up"></i> Upgrade plan</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
+
+                    <div className="dropDownItem"><i className="fa-solid fa-circle-plus"> &nbsp;</i>Signup</div>
+                    <div className="dropDownItem"><i className="fa-solid fa-circle-plus"> &nbsp;</i>Login</div>
+                     <div className="dropDownItem"><i className="fa-solid fa-gear"></i> Settings</div>
+                    <div className="dropDownItem" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
                 </div>
             }
             <Chat></Chat>

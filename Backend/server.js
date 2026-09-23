@@ -3,14 +3,21 @@ import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
+import userRoutes from "./routes/user.js"
+import cookieParser from "cookie-parser";
+
+
 
 const app = express();
 const PORT = 8080;
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use("/api", chatRoutes);
+app.use("/user",userRoutes)
+
 
 app.listen(PORT, () => {
     console.log(`server running on ${PORT}`);
@@ -53,3 +60,17 @@ const connectDB = async() => {
 //     }
 // });
 
+// import "dotenv/config";
+// import { GoogleGenAI } from "@google/genai";
+
+// const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+// async function main() {
+//   const response = await ai.models.generateContent({
+//     model: "gemini-3-flash-preview",
+//     contents: "Hello! Apna introduction do, 2 line mein.",
+//   });
+//   console.log(response.text);
+// }
+
+// main().catch((err) => console.error("Error:", err.message));

@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/test", async(req, res) => {
     try {
         const thread = new Thread({
-            threadId: "abc",
+            threadId: "abcdi",
             title: "Testing New Thread2"
         });
 

@@ -1,8 +1,8 @@
 import "./Chat.css";
 import React, { useContext, useState, useEffect } from "react";
 import { MyContext } from "./MyContext";
-import ReactMarkdown from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
+import ReactMarkdown from "react-markdown"; // formet karne ke liye respose yadi code aaya to code me list aaye to list me 
+import rehypeHighlight from "rehype-highlight"; // highlite karne ke liye 
 import "highlight.js/styles/github-dark.css";
 
 function Chat() {
