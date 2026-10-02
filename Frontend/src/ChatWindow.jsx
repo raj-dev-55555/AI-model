@@ -28,9 +28,12 @@ function ChatWindow() {
                 threadId: currThreadId
             })
         };
+      
 
         try {
-            const response = await fetch("http://localhost:8080/api/chat", options);
+            // const response = await fetch("http://localhost:8080/api/chat", options);
+            const response = await fetch("  https://ai-model-de3k.onrender.com/api/chat", options);
+
             const res = await response.json();
             console.log(res);
             setReply(res.reply);
@@ -66,7 +69,9 @@ function ChatWindow() {
    const logout = async()=>{
   try {
     const token = localStorage.getItem('token');
-    await axios.post("http://localhost:8080/user/logout", {}, {
+    // await axios.post("http://localhost:8080/user/logout", {}, {
+    await axios.post("https://ai-model-de3k.onrender.com/user/logout", {}, {
+
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (err) {

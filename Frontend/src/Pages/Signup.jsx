@@ -22,8 +22,10 @@ function Signup (){
             email:email,
             password:password
           }
+ 
+          // let response =  await axios.post("http://localhost:8080/user/signup",user);
+          let response =  await axios.post("https://ai-model-de3k.onrender.com/user/signup",user);
 
-          let response =  await axios.post("http://localhost:8080/user/signup",user);
            let token = response.data.token
           // Cookies.set("token", response.data.token);
           localStorage.setItem('token',response.data.token)
