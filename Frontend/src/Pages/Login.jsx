@@ -17,8 +17,10 @@ function Login (){
             email:email,
             password:password
           }
+ 
+          // let response =  await axios.post("http://localhost:8080/user/login",user);
+          let response =  await axios.post("https://ai-model-de3k.onrender.com/user/login",user);
 
-          let response =  await axios.post("http://localhost:8080/user/login",user);
            let token = response.data.token
           // Cookies.set("token", response.data.token);
           localStorage.setItem('token',response.data.token)

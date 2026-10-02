@@ -22,8 +22,11 @@ function Protected ({children}){
     }
 
     const verifyToken = async () => {
+     
       try {
-        const res = await axios.get("http://localhost:8080/user/checkToken", {
+        // const res = await axios.get("http://localhost:8080/user/checkToken", {
+        const res = await axios.get(" https://ai-model-de3k.onrender.com/user/checkToken", {
+
           headers: {
             'Authorization': `Bearer ${token}`
           }
